@@ -5,14 +5,15 @@ import "./App.css";
 import Person from "./Person/Person";
 
 const StyleButton = styled.button`
-  background-color: green;
+  background-color: ${(props) => (props.alt ? "red" : "green")};
   color: white;
+  font: inherit;
   border: 1px solid blue;
   padding: 8px;
   cursor: pointer;
 
   &:hover {
-    background-color: lightgreen;
+    background-color: ${(props) => (props.alt ? "salmon" : "lightgreen")};
     color: black;
   }
 `;
@@ -88,11 +89,11 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = "red";
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black",
-      };
+      // style.backgroundColor = "red";
+      // style[":hover"] = {
+      //   backgroundColor: "salmon",
+      //   color: "black",
+      // };
     }
 
     let classes = [];
@@ -107,7 +108,10 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I'm a React App</h1>
         <p className={classes.join(" ")}> This is really working</p>
-        <StyleButton onClick={this.togglePersonsHandler}>
+        <StyleButton
+          alt={this.state.showPersons}
+          onClick={this.togglePersonsHandler}
+        >
           Toggle Persons
         </StyleButton>
         {persons}
